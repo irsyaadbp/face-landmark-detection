@@ -55,7 +55,7 @@ const startVideo = async () => {
   };
 };
 
-export const runDetector = async (video, canvas, detectLoaded) => {
+const runDetector = async (video, canvas, detectLoaded) => {
   const model = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
   const detectorConfig = {
     runtime: "tfjs",
