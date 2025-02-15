@@ -1,9 +1,12 @@
 <template>
   <div id="app">
     <h1>Face Detection with MediaPipe FaceMesh</h1>
-    <button @click="runtimeActive = 'mediapipe'" :disabled="runtimeActive === 'mediapipe'">Mediapipe</button>
-    <button @click="runtimeActive = 'tfjs'" :disabled="runtimeActive === 'tfjs'">Tfjs</button>
+    
     <component :is="component[runtimeActive]"/>
+    <div style="position: fixed; bottom: 10px; left: 0; right: 0;">
+      <button @click="runtimeActive = 'mediapipe'" :disabled="runtimeActive === 'mediapipe'">Mediapipe</button>
+    <button @click="runtimeActive = 'tfjs'" :disabled="runtimeActive === 'tfjs'">Tfjs</button>
+    </div>
   </div>
 </template>
 

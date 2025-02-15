@@ -6,7 +6,7 @@
   </template>
   
   <script setup lang="ts">
-  import { onMounted, ref } from "vue";
+  import { onBeforeUnmount, onMounted, ref } from "vue";
   import "@tensorflow/tfjs-backend-webgl";
   import * as faceLandmarksDetection from "@tensorflow-models/face-landmarks-detection";
   import * as tf from "@tensorflow/tfjs-core";
@@ -17,6 +17,7 @@
   const videoElement = ref(null);
   const canvasElement = ref(null);
   let faceModel: any = null;
+  let animationId = null
   
   onMounted(async () => {
     console.log(tf.getBackend())
@@ -78,9 +79,13 @@
       }
   
       // Continue detecting faces in next frame
-      requestAnimationFrame(detectFace);
+      animationId = requestAnimationFrame(detectFace);
     };
   }
+
+  onBeforeUnmount(() => {
+    cancelAnimationFrame(animationId)
+  })
   
   
   </script>
