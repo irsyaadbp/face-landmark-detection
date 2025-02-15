@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-      <video ref="videoElement" id="video" autoplay></video>
+      <video ref="videoElement" id="video" autoplay playsinline></video>
       <canvas ref="canvasElement" id="canvas"></canvas>
     </div>
   </template>
