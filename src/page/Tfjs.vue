@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <small v-if="loadingDetector">Loading detector...</small>
-    <video ref="videoRef" :width="inputResolution.width" :height="inputResolution.height" autoPlay playsinline/>
+    <video ref="videoRef" :width="inputResolution.width" :height="inputResolution.height" autoPlay playsinline webkit-playsinline muted="false"/>
     <canvas ref="canvasRef" :width="inputResolution.width" :height="inputResolution.height"
       style="position: absolute" />
   </div>
