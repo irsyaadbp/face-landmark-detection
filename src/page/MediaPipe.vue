@@ -1,11 +1,12 @@
 <template>
     <div id="app">
-      <video ref="videoElement" id="video" autoplay playsinline webkit-playsinline muted="false"></video>
-      <canvas ref="canvasElement" id="canvas"></canvas>
+      <video ref="videoElement" id="video" :width="inputResolution.width" :height="inputResolution.height" autoplay playsinline webkit-playsinline muted="false"></video>
+      <canvas ref="canvasElement" id="canvas" :width="inputResolution.width" :height="inputResolution.height"></canvas>
     </div>
   </template>
   
   <script setup lang="ts">
+  
   import { onBeforeUnmount, onMounted, ref } from "vue";
   import "@tensorflow/tfjs-backend-webgl";
   import * as faceLandmarksDetection from "@tensorflow-models/face-landmarks-detection";
@@ -13,6 +14,12 @@
   import * as faceMesh from '@mediapipe/face_mesh';
   
   import { drawResults } from "../utils/shared/util";
+
+
+const inputResolution = {
+  width: 640,
+  height: 480,
+};
   
   const videoElement = ref(null);
   const canvasElement = ref(null);
