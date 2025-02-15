@@ -9,12 +9,12 @@
 
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from "vue";
-import "@tensorflow/tfjs-core";
+import * as tf from "@tensorflow/tfjs-core";
 // Register WebGL backend.
 import "@tensorflow/tfjs-backend-webgl";
 import "@mediapipe/face_mesh";
-import { runDetector } from "../utils-tfjs/detector.js";
 import * as faceLandmarksDetection from "@tensorflow-models/face-landmarks-detection";
+// import { runDetector } from "../utils-tfjs/detector.js";
 import { drawMesh } from "../utils-tfjs/drawMesh.js";
 
 
@@ -48,6 +48,8 @@ const startVideo = async () => {
   video.srcObject = stream;
   video.play();
 
+  
+
   // Once the video is loaded, start detection
   video.onloadedmetadata = () => {
     isLoaded.value = true;
@@ -60,11 +62,14 @@ const runDetector = async (video, canvas, detectLoaded) => {
   const detectorConfig = {
     runtime: "tfjs",
   };
+  
   const detector = await faceLandmarksDetection.createDetector(
     model,
     detectorConfig
   );
+  console.log("Backend used", tf)
   const detect = async (net) => {
+    console.log(net)
     const estimationConfig = { flipHorizontal: false };
     const faces = await net.estimateFaces(video, estimationConfig);
     const ctx = canvas.getContext("2d");

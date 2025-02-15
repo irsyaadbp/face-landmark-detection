@@ -13,12 +13,12 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import PageTfjs from "./page/Tfjs.vue";
-import PageMediaPipe from "./page/MediaPipe.vue";
+// import PageMediaPipe from "./page/MediaPipe.vue";
 
 const runtimeActive = ref('mediapipe')
 
 const component = {
-  mediapipe: PageMediaPipe,
+  mediapipe: PageTfjs,
   tfjs: PageTfjs
 }
 
