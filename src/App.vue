@@ -6,6 +6,7 @@
     <div>
       <button @click="runtimeActive = 'mediapipe'" :disabled="runtimeActive === 'mediapipe'">Mediapipe</button>
       <button @click="runtimeActive = 'tfjs'" :disabled="runtimeActive === 'tfjs'">Tfjs</button>
+      <button @click="runtimeActive = 'normal'" :disabled="runtimeActive === 'normal'">Tfjs</button>
     </div>
   </div>
 </template>
@@ -14,12 +15,14 @@
 import { ref } from "vue";
 import PageTfjs from "./page/Tfjs.vue";
 import PageMediaPipe from "./page/MediaPipe.vue";
+import Normal from "./page/Normal.vue";
 
 const runtimeActive = ref('mediapipe')
 
 const component = {
   mediapipe: PageMediaPipe,
-  tfjs: PageTfjs
+  tfjs: PageTfjs,
+  normal: Normal
 }
 
 </script>
