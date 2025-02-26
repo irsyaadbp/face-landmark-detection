@@ -4,6 +4,7 @@
     <video ref="videoRef" :width="inputResolution.width" :height="inputResolution.height" autoPlay playsinline webkit-playsinline muted="false"/>
     <canvas ref="canvasRef" :width="inputResolution.width" :height="inputResolution.height"
       style="position: absolute" />
+    <label><input v-model="withDrawFace" type="checkbox" /> With draw face</label>
   </div>
 </template>
 
@@ -17,6 +18,7 @@ import * as faceLandmarksDetection from "@tensorflow-models/face-landmarks-detec
 // import { runDetector } from "../utils-tfjs/detector.js";
 import { drawMesh } from "../utils-tfjs/drawMesh.js";
 
+const withDrawFace = ref(true)
 
 const videoRef = ref(null);
 const canvasRef = ref(null);
@@ -73,10 +75,11 @@ const runDetector = async (video, canvas, detectLoaded) => {
     const estimationConfig = { flipHorizontal: false };
     const faces = await net.estimateFaces(video, estimationConfig);
     const ctx = canvas.getContext("2d");
-    animationId = requestAnimationFrame(() => drawMesh(faces[0], ctx));
+    if(withDrawFace.value) {
+      animationId = requestAnimationFrame(() => drawMesh(faces[0], ctx));
+    }
     detect(detector);
     loadingDetector.value = false
-    console.log('detect bray', faces)
   };
   detect(detector);
 };

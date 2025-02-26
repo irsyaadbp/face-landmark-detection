@@ -3,6 +3,7 @@
     <video ref="videoElement" id="video" :width="inputResolution.width" :height="inputResolution.height" autoplay
       playsinline webkit-playsinline muted="false"></video>
     <canvas ref="canvasElement" id="canvas" :width="inputResolution.width" :height="inputResolution.height"></canvas>
+    <label><input v-model="withDrawFace" type="checkbox" /> With draw face</label>
   </div>
 </template>
 
@@ -21,6 +22,8 @@ const inputResolution = {
   width: 640,
   height: 480,
 };
+
+const withDrawFace = ref(true)
 
 const videoElement = ref(null);
 const canvasElement = ref(null);
@@ -78,16 +81,13 @@ async function startVideo() {
     // Draw the current video frame onto the canvas
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-    console.log(video)
-
     const faces = await faceModel.estimateFaces(video); // Estimate faces from video
 
     // Clear previous canvas drawing
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    console.log(faces)
     // If faces are detected
-    if (faces.length > 0) {
+    if (faces.length > 0 && withDrawFace.value) {
       drawResults(ctx, faces, true, true)
     }
 
