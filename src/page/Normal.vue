@@ -1,6 +1,5 @@
 <template>
     <div id="app">
-        <small v-if="loadingDetector">Loading detector...</small>
         <video ref="videoRef" :width="inputResolution.width" :height="inputResolution.height" autoPlay playsinline
             webkit-playsinline muted="false" />
         <canvas ref="canvasRef" :width="inputResolution.width" :height="inputResolution.height"
@@ -9,10 +8,11 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted, ref } from "vue";
+
 const videoRef = ref(null);
 const canvasRef = ref(null);
 const isLoaded = ref(false);
-const loadingDetector = ref(true)
 
 const inputResolution = {
     width: 640,

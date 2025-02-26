@@ -6,7 +6,7 @@
     <div>
       <button @click="runtimeActive = 'mediapipe'" :disabled="runtimeActive === 'mediapipe'">Mediapipe</button>
       <button @click="runtimeActive = 'tfjs'" :disabled="runtimeActive === 'tfjs'">Tfjs</button>
-      <button @click="runtimeActive = 'normal'" :disabled="runtimeActive === 'normal'">Tfjs</button>
+      <button @click="runtimeActive = 'normal'" :disabled="runtimeActive === 'normal'">Normal</button>
     </div>
   </div>
 </template>
